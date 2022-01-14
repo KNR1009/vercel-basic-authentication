@@ -1,0 +1,11 @@
+{
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node" // app.js を node で実行する
+    }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "main.js" } // リソースへのアクセスを main.js を通す形に変更
+  ]
+}
