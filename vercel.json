@@ -2,10 +2,8 @@
   "builds": [
     {
       "src": "app.js",
-      "use": "@vercel/node" // app.js を node で実行する
+      "use": "@vercel/node"
     }
   ],
-  "routes": [
-    { "src": "/.*", "dest": "main.js" } // リソースへのアクセスを main.js を通す形に変更
-  ]
+  "routes": [{ "src": "/.*", "dest": "app.js" }]
 }

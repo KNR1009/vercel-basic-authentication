@@ -1,18 +1,17 @@
-const protect = require('static-auth');
-const safeCompare = require('safe-compare');
-
-const USER_NAME = process.env.USER_NAME || 'admin'; // プロジェクトの環境変数を設定していた場合はそちらを適用させる
-const PASSWORD = process.env.PASSWORD || 'admin';
+const protect = require("static-auth");
+const safeCompare = require("safe-compare");
 
 const app = protect(
-  '/',
-  (username, password) => safeCompare(username, USER_NAME) && safeCompare(password, PASSWORD), // timing attack 対策
+  "/",
+  (username, password) =>
+    safeCompare(username, process.env.USERNAME || "admin") &&
+    safeCompare(password, process.env.PASSWORD || "admin"),
   {
-    directory: `${__dirname}/pages`, // pages 配下のファイルを静的コンテンツとして配信する
+    directory: `${__dirname}/public`,
     onAuthFailed: (res) => {
-      res.end('Authentication failed')
+      res.end("Authentication failed");
     },
   }
-)
+);
 
-module.exports = app
+module.exports = app;
