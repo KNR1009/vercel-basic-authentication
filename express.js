@@ -6,7 +6,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   try {
-    res.send({ name: "hoge" });
+    // res.send({ name: "hoge" });
+    res.sendFile(__dirname + "/public/index.html");
   } catch (error) {
     res.sendStatus(500);
   }
