@@ -9,4 +9,24 @@
   <body>
     <h1>Hello world</h1>
   </body>
+  <script>
+    // ローカル環境
+    // const test = () => {
+    //   fetch("http://localhost:3000/api")
+    //     .then((response) => response.json())
+    //     .then((json) => console.log(json));
+    // };
+
+    // test();
+    // vercelデプロイ後
+    const test = () => {
+      fetch(
+        "https://vercel-basic-authentication-kazunariito-third-scope.vercel.app//api"
+      )
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+    };
+
+    test();
+  </script>
 </html>
