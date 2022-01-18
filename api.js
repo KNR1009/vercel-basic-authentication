@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,4 +27,3 @@ app.listen({ port: 3000 }, () => {
 console.log("starts");
 
 module.exports = app;
-module.exports = router;
