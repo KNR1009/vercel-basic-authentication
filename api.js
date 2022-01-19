@@ -47,14 +47,13 @@ app.get("/api", function (req, res) {
     .then((snapshot) => {
       snapshot.forEach((doc) => {
         if (doc.id === id) {
-          res.json({ first: doc.data().first, last: doc.data().last });
+          res.json(doc.data());
         }
       });
     })
     .catch((err) => {
       console.log("Error getting documents", err);
     });
-
   // res.json(obj);
 });
 
