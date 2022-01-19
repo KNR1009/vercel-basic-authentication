@@ -12,42 +12,45 @@ admin.initializeApp({ credential: admin.credential.cert(ServiceAccount) });
 const db = admin.firestore();
 const docRef = db.collection("users").doc("alovelace");
 
-// データを取得
-db.collection("users")
-  .get()
-  .then((snapshot) => {
-    snapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
-  })
-  .catch((err) => {
-    console.log("Error getting documents", err);
-  });
+// // データを取得
+// db.collection("users")
+//   .get()
+//   .then((snapshot) => {
+//     snapshot.forEach((doc) => {
+//       console.log(doc.id, "=>", doc.data());
+//       console.log(doc.data().first);
+//     });
+//   })
+//   .catch((err) => {
+//     console.log("Error getting documents", err);
+//   });
 
-// データを登録
-const setAda = docRef.set({
-  first: "Ada",
-  last: "Lovelace",
-  born: 1815,
-});
+// // データを登録;
+// const setAda = docRef.set({
+//   first: "Ada",
+//   last: "Lovelace",
+//   born: 1815,
+// });
 
 // firebase周り終了
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// エンドポイントの作成
+// htmlファイルから叩かれるエンドポイント
 app.get("/api", function (req, res) {
-  const ip = req.query.ip;
-  var obj = { aaa: 100, bbb: 200, ip: ip };
+  db.collection("users")
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        res.json({ first: doc.data().first, last: doc.data().last });
+      });
+    })
+    .catch((err) => {
+      console.log("Error getting documents", err);
+    });
 
-  if (ip === "ame") {
-    obj = { aaa: 100, bbb: 200 };
-  } else {
-    obj = { message: "エラーです" };
-  }
-
-  res.json(obj);
+  // res.json(obj);
 });
 
 // ページ遷移
