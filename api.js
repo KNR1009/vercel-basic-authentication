@@ -7,13 +7,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // エンドポイントの作成
 app.get("/api", function (req, res) {
-  var obj = { aaa: 100, bbb: 200 };
+  const ip = req.query.ip;
+  var obj = { aaa: 100, bbb: 200, ip: ip };
 
-  // if (req.query.ip === kazu) {
-  //   var obj = { aaa: 100, bbb: 200 };
-  // } else {
-  //   var obj = { message: "エラーです" };
-  // }
   res.json(obj);
 });
 
