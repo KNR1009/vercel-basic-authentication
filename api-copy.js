@@ -2,24 +2,6 @@ const { query } = require("express");
 const express = require("express");
 const app = express();
 
-// firebase周り
-const admin = require("firebase-admin");
-const functions = require("firebase-functions");
-const ServiceAccount = require("./ServiceAccount.json");
-
-admin.initializeApp({ credential: admin.credential.cert(ServiceAccount) });
-
-const db = admin.firestore();
-const docRef = db.collection("users").doc("alovelace");
-
-const setAda = docRef.set({
-  first: "Ada",
-  last: "Lovelace",
-  born: 1815,
-});
-
-// firebase周り終了
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
