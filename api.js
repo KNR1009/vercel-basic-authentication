@@ -12,6 +12,19 @@ admin.initializeApp({ credential: admin.credential.cert(ServiceAccount) });
 const db = admin.firestore();
 const docRef = db.collection("users").doc("alovelace");
 
+// データを取得
+db.collection("users")
+  .get()
+  .then((snapshot) => {
+    snapshot.forEach((doc) => {
+      console.log(doc.id, "=>", doc.data());
+    });
+  })
+  .catch((err) => {
+    console.log("Error getting documents", err);
+  });
+
+// データを登録
 const setAda = docRef.set({
   first: "Ada",
   last: "Lovelace",
