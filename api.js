@@ -10,6 +10,12 @@ app.get("/api", function (req, res) {
   const ip = req.query.ip;
   var obj = { aaa: 100, bbb: 200, ip: ip };
 
+  if (ip === "ame") {
+    obj = { aaa: 100, bbb: 200 };
+  } else {
+    obj = { message: "エラーです" };
+  }
+
   res.json(obj);
 });
 
