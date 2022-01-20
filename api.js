@@ -5,6 +5,7 @@ const app = express();
 // firebase周り
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
+const { render } = require("react-dom");
 const ServiceAccount = require("./ServiceAccount.json");
 
 admin.initializeApp({ credential: admin.credential.cert(ServiceAccount) });
@@ -42,14 +43,19 @@ app.use(express.urlencoded({ extended: true }));
 // クエリパラメタで必要な組織idを送る
 app.get("/api", function (req, res) {
   const id = req.query.id;
+  let result = [];
   db.collection("users")
     .get()
     .then((snapshot) => {
       snapshot.forEach((doc) => {
-        if (doc.id === id) {
-          res.json(doc.data());
-        }
+        result.push(doc.data());
+        // res.json(doc.data());
+        // if (doc.id === id) {
+        //   res.json(doc.data());
+        // }
       });
+      // データをオブジェクト配列で返却
+      res.json(result);
     })
     .catch((err) => {
       console.log("Error getting documents", err);
